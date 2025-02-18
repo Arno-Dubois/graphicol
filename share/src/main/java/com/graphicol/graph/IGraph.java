@@ -10,7 +10,7 @@ public interface IGraph<E> {
 
     void addNodes(@NotNull final INode<E> node);
 
-    void loadFromJson(final Gson json);
+    void loadFromJson(final String jsonFileName);
 
     Gson toJson();
 
