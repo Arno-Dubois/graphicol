@@ -5,5 +5,6 @@ public class Model implements IModel {
 
     public Model() {
         this.graph.loadFromJson("AventuriersDuRailEurope.json");
+        System.out.println(this.graph.getSpanningTreeByPrim().toPrettyText());
     }
 }

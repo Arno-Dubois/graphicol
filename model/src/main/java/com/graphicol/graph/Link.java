@@ -36,4 +36,9 @@ public class Link<E> implements ILink<E> {
     public void setWeight(final int weight) {
         this.weight = weight;
     }
+
+    @Override
+    public int compareTo(@NotNull final ILink<E> other) {
+        return Integer.compare(this.getWeight(), other.getWeight());
+    }
 }

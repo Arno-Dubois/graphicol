@@ -37,6 +37,7 @@ public class StringGraph extends Graph<String> {
                 INode<String> start = this.getNodeByValue(link.nodes()[0]);
                 INode<String> end = this.getNodeByValue(link.nodes()[1]);
                 start.addLink(new Link<>(start, end, link.weight()));
+                end.addLink(new Link<>(end, start, link.weight()));
             }
 
 

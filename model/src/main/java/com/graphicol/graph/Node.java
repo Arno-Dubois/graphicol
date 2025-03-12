@@ -33,4 +33,9 @@ public class Node<E> implements INode<E> {
     public void setValue(final E value) {
         this.value = value;
     }
+
+    @Override
+    public String toString() {
+        return this.getValue().toString();
+    }
 }

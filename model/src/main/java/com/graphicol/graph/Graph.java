@@ -1,5 +1,6 @@
 package com.graphicol.graph;
 
+import fr.arnodubois.treenode.NaryTreeNode;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -7,6 +8,27 @@ import java.util.List;
 
 public abstract class Graph<E> implements IGraph<E> {
     private final List<INode<E>> nodes = new ArrayList<>();
+
+    @Override
+    public NaryTreeNode<INode<E>> getSpanningTreeByPrim() {
+        if (this.getNodes().isEmpty()) return null;
+        NaryTreeNode<INode<E>> spanningTree = new NaryTreeNode<>(this.get(10));
+        while (spanningTree.getSize() != this.getNodes().size()) {
+            ILink<E> minLink = null;
+            for (INode<E> node : spanningTree.toByWidthList()) {
+                for (ILink<E> link : node.getLinks()) {
+                    if (!spanningTree.contains(link.getEnd())) {
+                        minLink = (minLink == null ? link : (minLink.compareTo(link) > 0 ? link : minLink));
+                    }
+                }
+            }
+            if (minLink != null) {
+                spanningTree.getNodeFromElement(minLink.getStart()).addChild(minLink.getEnd());
+
+            }
+        }
+        return spanningTree;
+    }
 
     @Override
     public List<INode<E>> getNodes() {
@@ -17,6 +39,10 @@ public abstract class Graph<E> implements IGraph<E> {
     public void addNodes(final @NotNull INode<E> node) {
         if (this.nodes.contains(node)) return;
         this.nodes.add(node);
+    }
+
+    public final INode<E> get(final int index) {
+        return this.getNodes().get(index);
     }
 
 }
